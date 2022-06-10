@@ -28,6 +28,7 @@ for (k = 0; k < n; k++) {
 	f[k] = 0;
 }
 int need[n][m];
+//extra resources needed apart from the resource allocated ie alloc
 for (i = 0; i < n; i++) {
 	for (j = 0; j < m; j++)
 	need[i][j] = max[i][j] - alloc[i][j];
@@ -36,7 +37,7 @@ int y = 0;
 for (k = 0; k < 5; k++) {
 	for (i = 0; i < n; i++) {
 	if (f[i] == 0) {
-
+        //select a process with needs less than available resource
 		int flag = 0;
 		for (j = 0; j < m; j++) {
 		if (need[i][j] > avail[j]){
@@ -44,11 +45,12 @@ for (k = 0; k < 5; k++) {
 			break;
 		}
 		}
-
+        //if found free up that need since it is completed within available resource
 		if (flag == 0) {
 		ans[ind++] = i;
 		for (y = 0; y < m; y++)
 			avail[y] += alloc[i][y];
+        //declare that ith process is safe and doesnt require extra resources
 		f[i] = 1;
 		}
 	}
